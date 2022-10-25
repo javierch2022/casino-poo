@@ -5,4 +5,3 @@ export class Casino{
 }
 
 
-console.log(test);
