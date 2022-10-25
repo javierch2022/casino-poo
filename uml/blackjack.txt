@@ -1,0 +1,5 @@
+ aqui vamos a encontrar un link con el proyecto de blackja<div class="form-check mb-3">
+
+https://github.com/pabloadbes/blackjack
+
+
