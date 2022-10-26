@@ -1,0 +1,2 @@
+1- ruleta : no se definio "apuesta"
+2- juego : criterio al definir los atributos?
