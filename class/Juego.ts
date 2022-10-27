@@ -4,14 +4,12 @@ import { Tragamonedas } from "./juegos/tragamonedas";
 
 
 export class Juego {
-    protected nombre: string;
-    protected plata: number;
+    protected nombre: string; 
     protected credito: number;
     protected montoApostado: number;
 
-    constructor(pNombre: string, pPlata: number, pCredito: number, pMontoApostado: number) {
+    constructor(pNombre: string,pCredito: number, pMontoApostado: number) {
         this.nombre = pNombre;
-        this.plata = pPlata;
         this.credito = pCredito;
         this.montoApostado = pMontoApostado;
     }
@@ -22,17 +20,11 @@ export class Juego {
     public setNombre(pNombre: string): void {
         this.nombre = pNombre;
     }
-    public getPlata(): number {
-        return this.plata;
-    }
-    public setPlata(pPlata: number): void {
-        this.plata = pPlata;
-    }
     public getCredito(): number {
         return this.credito;
     }
     public setCredito(pCredito: number): void {
-        this.plata = pCredito;
+        this.credito = pCredito;
     }
     public getMontoApostado(): number {
         return this.montoApostado;
@@ -40,6 +32,9 @@ export class Juego {
     public setMontoApostado(pMontoApostado: number): void {
         this.montoApostado = pMontoApostado;
     }
+    /*---------------metodos---------------*/
+
+    
 }
 
 

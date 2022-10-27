@@ -1,12 +1,12 @@
 import { Juego } from "../Juego";
-export class Tragamonedas /*extends Juego*/{
+export class Tragamonedas extends Juego{
     protected cantidadColumna : number;
     protected cantidadFigura : number;
     protected palanca : boolean;
     protected pagoCasa : number;
 
-    constructor(/*pNombre:string,pPlata:number,pCredito:number,pMontoApostado:number,*/pCantColum:number,pCantFig:number,pPalanca:boolean,pPagoCasa:number){
-        /*super(pNombre,pPlata,pCredito,pMontoApostado)*/
+    constructor(pNombre:string,pPlata:number,pCredito:number,pMontoApostado:number,pCantColum:number,pCantFig:number,pPalanca:boolean,pPagoCasa:number){
+        super(pNombre,pCredito,pMontoApostado)
         this.cantidadColumna = pCantColum;
         this.cantidadFigura = pCantFig;
         this.palanca = pPalanca;
