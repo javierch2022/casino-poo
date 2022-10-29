@@ -1,3 +1,4 @@
+
 import { Juego } from "../Juego";
 class ApuestaBlackJack {
     private creditoApuesta: number;
@@ -62,11 +63,21 @@ export class BlackJack extends Juego {
     public entregarCarta(): number {
         return Math.round(Math.random() * (14 - 1) + 1);
     }
+    public quiereCarta():boolean{
+        let otraCarta = readlineSync.question("¿quiere otra carta? (s/n): ");
+        if (otraCarta == "s" || otraCarta == "S"){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public jugar():void{
         let jugador : number = 0;
         if(this.validarCreditos()){
-            while(this.pedirCartas)
-            jugador += this.entregarCarta(); //
+            while(this.quiereCarta()){
+                jugador += this.entregarCarta(); // falta terminar, falta definir limites de while loop.
+            }
         }
     }
 }
+//
