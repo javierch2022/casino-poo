@@ -1,12 +1,11 @@
 import { Juego } from "../Juego";
-class ApuestaRuleta {
+export class ApuestaRuleta {
     private ubicacion: string;
     private creditoApuesta: number;
     private numeroApostado: number;
 
 
     constructor(ubicacion: string, pCreditoApuesta: number, pNumeroApostado: number) {
-
         this.ubicacion = ubicacion;
         this.creditoApuesta = pCreditoApuesta;
         this.numeroApostado = pNumeroApostado;
