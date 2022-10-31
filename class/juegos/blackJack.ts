@@ -1,3 +1,4 @@
+var readlineSync = require('readline-sync');
 
 import { Juego } from "../Juego";
 class ApuestaBlackJack {
@@ -20,16 +21,16 @@ export class BlackJack extends Juego {
     protected cartasPC: number;
 
 
-    constructor(pNombre: string, pCredito: number, pMontoApostado: number, pPedirCartas: boolean, pNoMasCartas: boolean, pPagoCasa: number) {
+    constructor(pNombre: string, pCredito: number, pMontoApostado: number, ) {
         super(pNombre, pCredito, pMontoApostado);
 
         this.totalCartas = 52;
         this.numeroCartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         /* this.palos = ['C', 'D', 'P', 'T']; // C = CORZARON, D = DIAMANTE, P = PICA, T = TREBOL
          this.cartasEspeciales = ['J', 'Q', 'K', 'A'];*/
-        this.pedirCartas = pPedirCartas;
-        this.noMasCartas = pNoMasCartas;
-        this.pagoCasa = pPagoCasa;
+        this.pedirCartas = false;
+        this.noMasCartas = false;
+        this.pagoCasa = 1;
 
     }
 
@@ -64,7 +65,7 @@ export class BlackJack extends Juego {
         return Math.round(Math.random() * (14 - 1) + 1);
     }
     public quiereCarta(): boolean {
-        let otraCarta = String(prompt("¿quiere otra carta? (s/n): "));
+        let otraCarta =  readlineSync.question("¿quiere otra carta? (s/n): ");
         if (otraCarta == "s" || otraCarta == "S") {
             return true;
         } else {
@@ -77,22 +78,31 @@ export class BlackJack extends Juego {
         if (this.validarCreditos()) {
             while (jugador <= 21 && this.quiereCarta()) {
                 jugador += this.entregarCarta(); // falta terminar, falta definir limites de while loop.
+                console.log("jugador: " +jugador);
             }
         } else {
             console.log("No tiene creditos para jugar");
             console.log("gracias por haber gastado su dinero aqui");
         }
         if (jugador != 0) {
-            let carta = 0
-            while (computadora <= 21 && Math.round(Math.random() * (1 - 0) + 0) && carta > 2) {
+            let carta = 0;
+            let jugadorGana : boolean = true;
+            while (computadora <= 21 && Math.round(Math.random() * (1 - 0) + 0) && jugadorGana) {
                 carta++; 
                 computadora += this.entregarCarta();
+                if(jugador > 21){
+                    jugadorGana = false;
+                    console.log(jugadorGana);
+                }
+                console.log("carta: " + carta);
+                console.log("computadora: " +computadora);
             }
         }
-        if(jugador > computadora){
+
+        if(jugador <= 21 && jugador > computadora){
             console.log("jugador gana");
             this.pagarApuesta(2);
-        } else if(computadora > jugador){
+        } else if((jugador <= 21 && computadora > jugador)||(jugador >21)){
             console.log("gana la casa, el jugador pierde");
             this.cobrarApuesta(2);
         }else{
