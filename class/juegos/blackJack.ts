@@ -30,7 +30,7 @@ export class BlackJack extends Juego {
          this.cartasEspeciales = ['J', 'Q', 'K', 'A'];*/
         this.pedirCartas = false;
         this.noMasCartas = false;
-        this.pagoCasa = 1;
+        this.pagoCasa = 5;
 
     }
 
@@ -47,6 +47,7 @@ export class BlackJack extends Juego {
     public getNoMasCartas(): boolean {
         return this.noMasCartas;
     }
+    
     //--------metodos---------//
     public validarCreditos() {
         if (this.credito > 0) {
@@ -56,7 +57,7 @@ export class BlackJack extends Juego {
         }
     }
     public pagarApuesta(pCredito: number): void {
-        this.credito += pCredito;
+        this.credito += pCredito * this.pagoCasa;
     }
     public cobrarApuesta(pCredito: number): void {
         this.credito -= pCredito;
@@ -101,13 +102,13 @@ export class BlackJack extends Juego {
 
         if((jugador <= 21 && jugador > computadora)||(jugador < computadora && computadora > 21)){
             console.log("jugador gana");
-            this.pagarApuesta(2);
+            this.pagarApuesta(this.montoApostado);
         } else if((computadora <= 21 && computadora > jugador)||(jugador > computadora && jugador >21)){
             console.log("gana la casa, el jugador pierde");
-            this.cobrarApuesta(2);
+            this.cobrarApuesta(this.montoApostado);
         }else{
             console.log("empate");
-            this.cobrarApuesta(1);
         }
+        console.log("credito usuario:" + this.credito)
     }
 }

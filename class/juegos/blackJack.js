@@ -34,7 +34,7 @@ var BlackJack = /** @class */ (function (_super) {
          this.cartasEspeciales = ['J', 'Q', 'K', 'A'];*/
         _this.pedirCartas = false;
         _this.noMasCartas = false;
-        _this.pagoCasa = 1;
+        _this.pagoCasa = 5;
         return _this;
     }
     //--------get & set-------//
@@ -60,7 +60,7 @@ var BlackJack = /** @class */ (function (_super) {
         }
     };
     BlackJack.prototype.pagarApuesta = function (pCredito) {
-        this.credito += pCredito;
+        this.credito += pCredito * this.pagoCasa;
     };
     BlackJack.prototype.cobrarApuesta = function (pCredito) {
         this.credito -= pCredito;
@@ -106,16 +106,16 @@ var BlackJack = /** @class */ (function (_super) {
         }
         if ((jugador <= 21 && jugador > computadora) || (jugador < computadora && computadora > 21)) {
             console.log("jugador gana");
-            this.pagarApuesta(2);
+            this.pagarApuesta(this.montoApostado);
         }
         else if ((computadora <= 21 && computadora > jugador) || (jugador > computadora && jugador > 21)) {
             console.log("gana la casa, el jugador pierde");
-            this.cobrarApuesta(2);
+            this.cobrarApuesta(this.montoApostado);
         }
         else {
             console.log("empate");
-            this.cobrarApuesta(1);
         }
+        console.log("credito usuario:" + this.credito);
     };
     return BlackJack;
 }(Juego_1.Juego));
