@@ -62,7 +62,7 @@ export class BlackJack extends Juego {
         this.credito -= pCredito;
     }
     public entregarCarta(): number {
-        return Math.round(Math.random() * (14 - 1) + 1);
+        return Math.round(Math.random() * (10 - 1) + 1);
     }
     public quiereCarta(): boolean {
         let otraCarta =  readlineSync.question("¿quiere otra carta? (s/n): ");
@@ -87,22 +87,22 @@ export class BlackJack extends Juego {
         if (jugador != 0) {
             let carta = 0;
             let jugadorGana : boolean = true;
-            while (computadora <= 21 && Math.round(Math.random() * (1 - 0) + 0) && jugadorGana) {
+            while (computadora <= 20 && (computadora <17 ||Math.round(Math.random() * (1 - 0) + 0)) && jugadorGana) {
                 carta++; 
                 computadora += this.entregarCarta();
-                if(jugador > 21){
+                if(jugador > 21 && carta > 2 && computadora >=17){
                     jugadorGana = false;
-                    console.log(jugadorGana);
+                    console.log(jugadorGana);// estado true false 
                 }
-                console.log("carta: " + carta);
+                    console.log("carta: " + carta);
                 console.log("computadora: " +computadora);
             }
         }
 
-        if(jugador <= 21 && jugador > computadora){
+        if((jugador <= 21 && jugador > computadora)||(jugador < computadora && computadora > 21)){
             console.log("jugador gana");
             this.pagarApuesta(2);
-        } else if((jugador <= 21 && computadora > jugador)||(jugador >21)){
+        } else if((computadora <= 21 && computadora > jugador)||(jugador > computadora && jugador >21)){
             console.log("gana la casa, el jugador pierde");
             this.cobrarApuesta(2);
         }else{
