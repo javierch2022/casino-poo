@@ -169,9 +169,6 @@ var Ruleta = /** @class */ (function (_super) {
     Ruleta.prototype.cobrarApuesta = function (pCredito) {
         this.credito -= pCredito;
     };
-    Ruleta.prototype.girarRuleta = function () {
-        return Math.round(Math.random() * (36 - 0) + 0);
-    };
     Ruleta.prototype.validarApuestas = function (pGirarRuleta) {
         if (this.ubicacionApuesta.length > 0) {
             for (var i = 0; i < this.ubicacionApuesta.length; i++) {
