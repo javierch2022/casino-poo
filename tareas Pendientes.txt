@@ -1,2 +1,2 @@
 1- ruleta : no se definio "apuesta"
-2- blackjack : no se definio "carta"
+2- blackjack : DEFINIR COMO SE TRATARA "CARTA"
