@@ -1,6 +1,7 @@
 var readlineSync = require('readline-sync');
 
 import { Juego } from "../Juego";
+
 class ApuestaBlackJack {
     private creditoApuesta: number;
     constructor(creditoApuesta: number) {

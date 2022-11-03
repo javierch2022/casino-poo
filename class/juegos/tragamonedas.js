@@ -19,39 +19,84 @@ exports.Tragamonedas = void 0;
 var Juego_1 = require("../Juego");
 var Tragamonedas = /** @class */ (function (_super) {
     __extends(Tragamonedas, _super);
-    function Tragamonedas(pNombre, pPlata, pCredito, pMontoApostado, pCantColum, pCantFig, pPalanca, pPagoCasa) {
+    function Tragamonedas(pNombre, pCredito, pMontoApostado, pCantRodillo, pCantFigura) {
         var _this = _super.call(this, pNombre, pCredito, pMontoApostado) || this;
-        _this.cantidadColumna = pCantColum;
-        _this.cantidadFigura = pCantFig;
-        _this.palanca = pPalanca;
-        _this.pagoCasa = pPagoCasa;
+        _this.cantidadRodillo = pCantRodillo;
+        _this.cantidadFigura = pCantFigura;
+        _this.pagoCasa = 5;
         return _this;
     }
-    Tragamonedas.prototype.getCantColum = function () {
-        return this.cantidadColumna;
+    // GET AND SET
+    Tragamonedas.prototype.getCantidadRodillo = function () {
+        return this.cantidadRodillo;
     };
-    Tragamonedas.prototype.setCantColum = function (pCantColum) {
-        this.cantidadColumna = pCantColum;
+    Tragamonedas.prototype.setCantidadRodillo = function (pCantRodillo) {
+        this.cantidadRodillo = pCantRodillo;
     };
-    Tragamonedas.prototype.getCantFig = function () {
+    Tragamonedas.prototype.getCantidadFigura = function () {
         return this.cantidadFigura;
     };
-    Tragamonedas.prototype.setCantFig = function (pCantFig) {
-        this.cantidadFigura = pCantFig;
+    Tragamonedas.prototype.setCantidadFigura = function (pCantFigura) {
+        this.cantidadFigura = pCantFigura;
     };
-    Tragamonedas.prototype.getPagoCasa = function () {
-        return this.pagoCasa;
+    // methodos 
+    Tragamonedas.prototype.pagarApuesta = function (pCredito) {
+        this.credito += pCredito * this.pagoCasa;
     };
-    Tragamonedas.prototype.setPagoCasa = function (pPagoCasa) {
-        this.pagoCasa = pPagoCasa;
+    Tragamonedas.prototype.cobrarApuesta = function (pCredito) {
+        this.credito -= pCredito;
     };
-    Tragamonedas.prototype.ejecPalanca = function (palanca) {
-        this.palanca = palanca;
-        if (palanca == true) {
-            /*definir accion - puede jugar? ejecutar juego?*/
+    Tragamonedas.prototype.girarRodillo = function () {
+        return Math.round(Math.random() * (this.getCantidadFigura() - 1) + 1);
+    };
+    Tragamonedas.prototype.validarCreditos = function () {
+        if (this.credito > 0) {
+            return true;
         }
         else {
-            /*definir accion - no puede jugar por falta de credito*/
+            return false;
+        }
+    };
+    Tragamonedas.prototype.Jugar = function () {
+        var jugador = 0;
+        var rodilloGirado = 0;
+        var ventana = [];
+        var coincidencia = 0;
+        if (this.validarCreditos()) {
+            for (var i = 0; i < this.cantidadRodillo; i++) {
+                ventana.push(this.girarRodillo());
+                console.log(ventana);
+            }
+            var contador = new Array(this.cantidadRodillo);
+            contador.fill(0);
+            for (var i = 0; i < ventana.length; i++) {
+                contador[ventana[i] - 1]++;
+            }
+            var maximo = 0;
+            var posicion = 0;
+            for (var i = 0; i < ventana.length; i++) {
+                if (contador[i] > maximo) {
+                    maximo = contador[i];
+                    posicion = i;
+                }
+            }
+            console.log("lista [] maximo : " + maximo);
+            console.log("lista [] posicion : " + posicion);
+            console.log("este es el contador : " + contador);
+            if (maximo === 3) {
+                //this.pagarApuesta(this.montoApostado*3);
+                this.pagarApuesta(this.montoApostado * 3);
+                console.log("tuvo 3 coincidencia");
+            }
+            else if (maximo === 2) {
+                this.pagarApuesta(this.montoApostado * 2);
+                console.log("tuvo 2 coincidencia");
+            }
+            else {
+                this.cobrarApuesta(this.montoApostado);
+                console.log("pierde");
+            }
+            console.log("credito usuario:" + this.credito);
         }
     };
     return Tragamonedas;
