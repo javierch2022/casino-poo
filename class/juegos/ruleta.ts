@@ -168,9 +168,7 @@ export class Ruleta extends Juego {
     }
     public cobrarApuesta(pCredito: number): void {
         this.credito -= pCredito;
-    }
-    public girarRuleta(): number {
-        return Math.round(Math.random() * (36 - 0) + 0);
+    
     }
     public validarApuestas(pGirarRuleta: number) {
 
