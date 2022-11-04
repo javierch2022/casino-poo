@@ -1,6 +1,6 @@
 var readlineSync = require('readline-sync');
 
-import { Juego } from "../Juego";
+import { Juego } from "../../juego";
 
 class ApuestaBlackJack {
     private creditoApuesta: number;

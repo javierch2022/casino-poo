@@ -1,4 +1,5 @@
-import { Juego } from "./Juego";
+import { Juego } from "./juego";
+import {Jugador} from "./jugador";
 
 export class Casino{
 

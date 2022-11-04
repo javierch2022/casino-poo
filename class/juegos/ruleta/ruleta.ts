@@ -1,4 +1,8 @@
-import { Juego } from "../Juego";
+var readlineSync = require('readline-sync');
+
+import { Juego } from "../../juego";
+
+
 export class ApuestaRuleta {
     private ubicacion: string;
     private creditoApuesta: number;

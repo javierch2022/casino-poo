@@ -1,6 +1,6 @@
 import {Casino} from './class/casino';
-import {BlackJack} from "./class/juegos/blackjack";
-import { Tragamonedas } from './class/juegos/tragamonedas';
+import {Juego} from './class/juego';
+import { Jugador } from './class/jugador';
 
 
 /*
@@ -22,5 +22,8 @@ let test :Tragamonedas = new Tragamonedas('TripleDiamante', 1000, 10, 3, 3);
 test.Jugar();
 test.Jugar();
 test.Jugar();
+
+
+
 
 

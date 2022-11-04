@@ -1,6 +1,6 @@
-import { BlackJack } from "./juegos/blackJack";
-import { Ruleta } from "./juegos/ruleta";
-import { Tragamonedas } from "./juegos/tragamonedas";
+import { BlackJack } from "./juegos/blackjack/blackJack";
+import { Ruleta } from "./juegos/ruleta/ruleta";
+import { Tragamonedas } from "./juegos/tragamonedas/tragamonedas";
 
 
 export class Juego {
