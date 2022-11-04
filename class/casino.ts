@@ -3,11 +3,14 @@ import {Jugador} from "./jugador";
 
 export class Casino{
     private nombre : string;
-    private jugador: Jugador;
-    private juego: Juego;
+    private jugador : Jugador;
+    private juegos: Juego[];
     private banca : number;
-    constructor (pNombre : string, pBanca: number){
+    
+    constructor (pNombre : string, pJugador : Jugador, pJuegos : Juego[], pBanca : number ){
         this.nombre = pNombre;
+        this.jugador = pJugador;
+        this.juegos = pJuegos;
         this.banca = pBanca;
     }
     //---get & set ---//

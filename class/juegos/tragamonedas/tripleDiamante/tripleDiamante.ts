@@ -1,4 +1,4 @@
-var readlineSync = require('readline-sync');
+var readlineSync = requireg('readline-sync');
 
 import { Tragamonedas } from "../tragamonedas";
 
