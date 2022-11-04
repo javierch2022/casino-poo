@@ -1,6 +1,6 @@
 var readlineSync = require('readline-sync');
 
-export class Jugador{
+export class Jugador {
     
     protected nombre:string;
     protected credito: number;
