@@ -16,12 +16,23 @@ el21.jugar();
 */
 
 
-let test :Tragamonedas = new Tragamonedas('TripleDiamante', 1000, 10, 3, 3);
+/*let test :Tragamonedas = new Tragamonedas('TripleDiamante', 1000, 10, 3, 3);
 
 
 test.Jugar();
 test.Jugar();
 test.Jugar();
+
+*/
+
+
+
+// variables para jugador
+let testJugador = new Jugador();
+
+
+console.log(testJugador);
+
 
 
 
