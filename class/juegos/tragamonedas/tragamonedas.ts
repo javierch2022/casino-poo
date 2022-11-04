@@ -89,7 +89,6 @@ export class Tragamonedas extends Juego {
 
 
         if (maximo === 3) {
-             //this.pagarApuesta(this.montoApostado*3);
              this.pagarApuesta(this.montoApostado * 3);
              console.log("tuvo 3 coincidencia");
          } else if (maximo === 2) {
