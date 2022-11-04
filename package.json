@@ -3,6 +3,6 @@
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
-    "@types/node": "^18.11.8"
+    "@types/node": "^18.11.9"
   }
 }
