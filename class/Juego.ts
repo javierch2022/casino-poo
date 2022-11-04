@@ -1,6 +1,7 @@
 import { BlackJack } from "./juegos/blackjack/blackJack";
 import { Ruleta } from "./juegos/ruleta/ruleta";
 import { Tragamonedas } from "./juegos/tragamonedas/tragamonedas";
+import { Casino } from "./casino";
 
 
 export class Juego {
@@ -8,7 +9,7 @@ export class Juego {
     protected credito: number;
     protected montoApostado: number;
 
-    constructor(pNombre: string,pCredito: number, pMontoApostado: number) {
+    constructor(pNombre: string,pCredito: number, pMontoApostado: number, ) {
         this.nombre = pNombre;
         this.credito = pCredito;
         this.montoApostado = pMontoApostado;
@@ -34,7 +35,20 @@ export class Juego {
     }
     /*---------------metodos---------------*/
 
-    
+    public pagarApuesta(pCredito: number): void {
+        this.credito += pCredito * this.pagoCasa;
+    }
+    public cobrarApuesta(pCredito: number): void {
+        this.credito -= pCredito;
+    }
+
+    public validarCreditos() {
+        if (this.credito > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 
