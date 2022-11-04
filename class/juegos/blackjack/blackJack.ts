@@ -12,9 +12,7 @@ class ApuestaBlackJack {
 export class BlackJack extends Juego {
     protected totalCartas: number; // todas las cartas
     protected mazoCartas: string[]; // sumar valores de cart
-    protected numeroCartas: string[]; // cartas de 1 a 10
-    /*protected palos: string[]; //corazon,diamante,etc
-    protected cartasEspeciales: string[]; // j,q,k,a */
+    protected numeroCartas: string[]; // cartas de 1 a 1
     protected pedirCartas: boolean;
     protected noMasCartas: boolean;
     protected pagoCasa: number;
@@ -22,16 +20,14 @@ export class BlackJack extends Juego {
     protected cartasPC: number;
 
 
-    constructor(pNombre: string, pCredito: number, pMontoApostado: number, ) {
+    constructor(pNombre: string, pCredito: number, pMontoApostado: number,pPagoCasa : number ) {
         super(pNombre, pCredito, pMontoApostado);
 
         this.totalCartas = 52;
         this.numeroCartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-        /* this.palos = ['C', 'D', 'P', 'T']; // C = CORZARON, D = DIAMANTE, P = PICA, T = TREBOL
-         this.cartasEspeciales = ['J', 'Q', 'K', 'A'];*/
         this.pedirCartas = false;
         this.noMasCartas = false;
-        this.pagoCasa = 5;
+        this.pagoCasa = pPagoCasa;
 
     }
 
@@ -50,19 +46,7 @@ export class BlackJack extends Juego {
     }
     
     //--------metodos---------//
-    public validarCreditos() {
-        if (this.credito > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public pagarApuesta(pCredito: number): void {
-        this.credito += pCredito * this.pagoCasa;
-    }
-    public cobrarApuesta(pCredito: number): void {
-        this.credito -= pCredito;
-    }
+    
     public entregarCarta(): number {
         return Math.round(Math.random() * (10 - 1) + 1);
     }
@@ -79,7 +63,7 @@ export class BlackJack extends Juego {
         let computadora: number = 0; // suma de cartas
         if (this.validarCreditos()) {
             while (jugador <= 21 && this.quiereCarta()) {
-                jugador += this.entregarCarta(); // falta terminar, falta definir limites de while loop.
+                jugador += this.entregarCarta(); 
                 console.log("jugador: " +jugador);
             }
         } else {
@@ -94,7 +78,6 @@ export class BlackJack extends Juego {
                 computadora += this.entregarCarta();
                 if(jugador > 21 && carta > 2 && computadora >=17){
                     jugadorGana = false;
-                    console.log(jugadorGana);// estado true false 
                 }
                     console.log("carta: " + carta);
                 console.log("computadora: " +computadora);
