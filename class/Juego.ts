@@ -8,11 +8,13 @@ export class Juego {
     protected nombre: string; 
     protected credito: number;
     protected montoApostado: number;
+    protected pagoCasa: number;
 
-    constructor(pNombre: string,pCredito: number, pMontoApostado: number, ) {
+    constructor(pNombre: string,pCredito: number, pMontoApostado: number, pPagoCasa: number) {
         this.nombre = pNombre;
         this.credito = pCredito;
         this.montoApostado = pMontoApostado;
+        this.pagoCasa = pPagoCasa;
     }
 
     public getNombre(): string {
@@ -35,7 +37,7 @@ export class Juego {
     }
     /*---------------metodos---------------*/
 
-    public pagarApuesta(pCredito: number): void {
+    public pagarApuesta(pCredito: number): void { /* Visto desde el CASINO */
         this.credito += pCredito * this.pagoCasa;
     }
     public cobrarApuesta(pCredito: number): void {

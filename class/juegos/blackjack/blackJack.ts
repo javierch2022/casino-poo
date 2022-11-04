@@ -15,20 +15,17 @@ export class BlackJack extends Juego {
     protected numeroCartas: string[]; // cartas de 1 a 1
     protected pedirCartas: boolean;
     protected noMasCartas: boolean;
-    protected pagoCasa: number;
     protected cartasJugador: number;
     protected cartasPC: number;
 
 
-    constructor(pNombre: string, pCredito: number, pMontoApostado: number,pPagoCasa : number ) {
+    constructor(pNombre: string, pCredito: number, pMontoApostado: number) {
         super(pNombre, pCredito, pMontoApostado);
 
         this.totalCartas = 52;
         this.numeroCartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         this.pedirCartas = false;
         this.noMasCartas = false;
-        this.pagoCasa = pPagoCasa;
-
     }
 
     //--------get & set-------//
@@ -50,6 +47,7 @@ export class BlackJack extends Juego {
     public entregarCarta(): number {
         return Math.round(Math.random() * (10 - 1) + 1);
     }
+
     public quiereCarta(): boolean {
         let otraCarta =  readlineSync.question("¿quiere otra carta? (s/n): ");
         if (otraCarta == "s" || otraCarta == "S") {
@@ -58,6 +56,7 @@ export class BlackJack extends Juego {
             return false;
         }
     }
+
     public jugar(): void {
         let jugador: number = 0; // suma de cartas 
         let computadora: number = 0; // suma de cartas

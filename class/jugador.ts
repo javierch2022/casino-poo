@@ -3,12 +3,14 @@ var readlineSync = require('readline-sync');
 export class Jugador {
     
     protected nombre:string;
+    protected dinero: number;
     protected credito: number;
 
     constructor(){
 
         this.nombre = readlineSync.question("Ingrese su nombre por favor : ");
-        this.credito = Number(readlineSync.question("Ingrese cantidad de credito a cargar : "));
+        this.dinero = Number(readlineSync.question("Ingrese el dinero del jugador: "));
+        this.credito = 0;
     }
 
     /////////////// get and set //////////////
