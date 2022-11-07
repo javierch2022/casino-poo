@@ -1,20 +1,19 @@
 var readlineSync = require('readline-sync');
 
 import { Juego } from "../../juego";
+import { Jugador } from "../../jugador";
+import { Casino } from "../../casino";
 
-
-export class Tragamonedas extends Juego {
+export abstract class Tragamonedas extends Juego {
 
     protected cantidadRodillo: number;
     protected cantidadFigura: number;
     protected pagoCasa: number;
 
-    constructor(pNombre: string, pCredito: number, pMontoApostado: number, pCantRodillo: number, pCantFigura: number) {
-        super(pNombre, pCredito, pMontoApostado)
-
+    constructor(pNombre: string, pCredito: number,pPagoCasa : number, pCantRodillo: number, pCantFigura: number) {
+        super(pNombre, pCredito, pPagoCasa);
         this.cantidadRodillo = pCantRodillo;
         this.cantidadFigura = pCantFigura;
-        this.pagoCasa = 5;
     }
 
     // GET AND SET
@@ -37,5 +36,5 @@ export class Tragamonedas extends Juego {
         return Math.round(Math.random() * (this.getCantidadFigura() - 1) + 1);
     }
 
-
+    abstract jugar(jugador:Jugador);
 }

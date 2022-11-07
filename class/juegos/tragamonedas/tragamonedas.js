@@ -20,11 +20,10 @@ var readlineSync = require('readline-sync');
 var juego_1 = require("../../juego");
 var Tragamonedas = /** @class */ (function (_super) {
     __extends(Tragamonedas, _super);
-    function Tragamonedas(pNombre, pCredito, pMontoApostado, pCantRodillo, pCantFigura) {
-        var _this = _super.call(this, pNombre, pCredito, pMontoApostado) || this;
+    function Tragamonedas(pNombre, pCredito, pPagoCasa, pCantRodillo, pCantFigura) {
+        var _this = _super.call(this, pNombre, pCredito, pPagoCasa) || this;
         _this.cantidadRodillo = pCantRodillo;
         _this.cantidadFigura = pCantFigura;
-        _this.pagoCasa = 5;
         return _this;
     }
     // GET AND SET
