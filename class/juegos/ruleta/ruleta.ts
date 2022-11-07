@@ -1,13 +1,14 @@
 var readlineSync = require('readline-sync');
 
 import { Juego } from "../../juego";
+import { Casino } from "../../casino";
+import { Jugador } from "../../jugador";
 
-
-export class ApuestaRuleta {
+/*export class ApuestaRuleta {
     private ubicacion: string;
     private creditoApuesta: number;
     private numeroApostado: number;
-
+"par" // "PAR"
 
     constructor(ubicacion: string, pCreditoApuesta: number, pNumeroApostado: number) {
         this.ubicacion = ubicacion;
@@ -33,9 +34,9 @@ export class ApuestaRuleta {
         this.numeroApostado = pNumeroApostado;
     }
 
-}
+}*/
 export class Ruleta extends Juego {
-    protected numeroTablero: number[];
+    /*protected numeroTablero: number[];
     protected listaNumerosRojos: number[];
     protected listaNumerosNegros: number[];
     protected listaPrimeraDocena: number[];
@@ -48,14 +49,14 @@ export class Ruleta extends Juego {
     protected lista19a36: number[];
     protected listaPar: number[];
     protected listaImpar: number[];
-    protected ubicacionApuesta: ApuestaRuleta[];
-    protected pagoCasa: number;
-    protected jugar: boolean;
+    protected ubicacionApuesta: ApuestaRuleta[];*/
 
-    constructor(pNombre: string, pCredito: number, pMontoApostado: number, pUbicacionApuesta: ApuestaRuleta[], pPagoCasa: number) {
-        super(pNombre, pCredito, pMontoApostado)
-        this.numeroTablero = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
-        this.listaNumerosRojos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+
+    constructor(pNombre: string, pCredito: number, pPagoCasa: number) {
+        super(pNombre, pCredito, pPagoCasa);
+
+        /*this.numeroTablero = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+       this.listaNumerosRojos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
         this.listaNumerosNegros = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35];
         this.listaPrimeraDocena = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         this.listaSegundaDocena = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
@@ -67,11 +68,14 @@ export class Ruleta extends Juego {
         this.lista19a36 = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
         this.listaPar = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36];
         this.listaImpar = [1, 3, 5, 7, 9, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35];
-        this.ubicacionApuesta = pUbicacionApuesta;
-        this.pagoCasa = pPagoCasa;
-        this.jugar = false;
-    };
-    public getNumeroTablero(): number[] {
+        this.ubicacionApuesta = pUbicacionApuesta;*/ 
+    }
+
+
+    //---get &  set---//
+
+
+   /* public getNumeroTablero(): number[] {
         return this.numeroTablero;
     }
     public setNumeroTablero(pNumeroTablero: number[]): void {
@@ -154,86 +158,103 @@ export class Ruleta extends Juego {
     }
     public setListaImpar(pListaImpar: number[]): void {
         this.listaImpar = pListaImpar;
-    }
+    }*/
 
     /*-------------------------------Metodos---------------------------------- */
-    public apostar(pApuesta: ApuestaRuleta) {
+    /*public apostar(pApuesta: ApuestaRuleta) {
         this.ubicacionApuesta.push(pApuesta);
-    }
-    public validarCreditos() {
-        if (this.credito > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public pagarApuesta(pCredito: number): void {
-        this.credito += pCredito;
-    }
-    public cobrarApuesta(pCredito: number): void {
-        this.credito -= pCredito;
-    
-    }
-    public validarApuestas(pGirarRuleta: number) {
+    }*/
 
-        if (this.ubicacionApuesta.length > 0) {
-            for (let i: number = 0; i < this.ubicacionApuesta.length; i++) {
-                let numeroApostado: number = this.ubicacionApuesta[i].getNumeroApostado();
-                let creditoApostado: number = this.ubicacionApuesta[i].getCreditoApuesta();
-                if (numeroApostado == pGirarRuleta) {
-                    //verifico si numeroApostado pertenece a listaNumerosRojos*/
-                    if (this.getListaNumerosRojos().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a listaNumerosNegros*/
-                    if (this.getListaNumerosNegros().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a primeraDocena*/
-                    if (this.getListaPrimeraDocena().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a segundaDocena*/
-                    if (this.getListaSegundaDocena().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a terceraDocena*/
-                    if (this.getListaTerceraDocena().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a primeraColumna*/
-                    if (this.getListaPrimeraColumna().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a segundaColumna*/
-                    if (this.getListaSegundaColumna().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a tercerColumna*/
-                    if (this.getListaTercerColumna().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a lista1a18*/
-                    if (this.getLista1a18().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a lista19a36*/
-                    if (this.getLista19a36().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a listaPar*/
-                    if (this.getListaPar().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                    //verifico si numeroApostado pertenece a listaImpar*/
-                    if (this.getListaImpar().includes(numeroApostado)) {
-                        this.pagarApuesta(creditoApostado * 2)
-                    };
-                } else {
-                    this.cobrarApuesta(creditoApostado);
-                }
+    public girarRuleta(): number {
+        return Math.round(Math.random() * (36 - 0) + 0);
+    }
+    public jugar(pJugador: Jugador): void {
+        console.log("creditos del jugador=??" + this.validarCreditos(pJugador))
+        if (this.validarCreditos(pJugador)) {
+            this.montoApostado = Number(readlineSync.question("¿cuantos creditos desea apostar?: "));
+            let parImpar : number = Number(readlineSync.question("Seleccione 0 para Par o 1 para Impar: "));
+            
+            if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
+                /*if (this.ubicacionApuesta.length > 0) {
+                    for (let i: number = 0; i < this.ubicacionApuesta.length; i++) {
+                        let numeroApostado: number = this.ubicacionApuesta[i].getNumeroApostado();
+                        let creditoApostado: number = this.ubicacionApuesta[i].getCreditoApuesta();*/
+                        let numeroRuleta : number = this.girarRuleta();
+                        console.log("Numero Ruleta: " + numeroRuleta);
+                        let ruletaParImpar : number = numeroRuleta % 2;
+                        console.log("Ruleta PAr / Impar: " + ruletaParImpar);
+                        if (numeroRuleta === 0){
+                            console.log("0 no es par ni impar");
+                            this.cobrarApuesta(this.montoApostado, pJugador);
+                        }
+                            else if(ruletaParImpar === parImpar){ //si es par paga 
+                                console.log("Gano");
+                                this.pagarApuesta(this.montoApostado, pJugador);
+                            } else {
+                                console.log("Perdió");
+                            this.cobrarApuesta(this.montoApostado, pJugador);
+                            }
+                        /*if (numeroApostado == pGirarRuleta) {*/
+                            //verifico si numeroApostado pertenece a listaNumerosRojos*/
+                            /*
+                            if (this.getListaNumerosRojos().includes(numeroApostado)) {
+                                this.pagarApuesta(this.montoApostado, pJugador);
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a listaNumerosNegros
+                            if (this.getListaNumerosNegros().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a primeraDocena
+                            if (this.getListaPrimeraDocena().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a segundaDocena
+                            if (this.getListaSegundaDocena().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a terceraDocena
+                            if (this.getListaTerceraDocena().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a primeraColumna
+                            if (this.getListaPrimeraColumna().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a segundaColumna
+                            if (this.getListaSegundaColumna().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a tercerColumna
+                            if (this.getListaTercerColumna().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a lista1a18
+                            if (this.getLista1a18().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                            //verifico si numeroApostado pertenece a lista19a36
+                            if (this.getLista19a36().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };*/
+                            //verifico si numeroApostado pertenece a listaPar
+                            /*if (this.getListaPar().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };*/
+                            //verifico si numeroApostado pertenece a listaImpar*/
+                            /*if (this.getListaImpar().includes(numeroApostado)) {
+                                this.pagarApuesta(creditoApostado * 2)
+                            };
+                        } else {
+                            this.cobrarApuesta(creditoApostado);
+                        }
+                    }
+                }*/
+            } else {
+                console.log("su apuesta excede los creditos que tiene");
             }
-        }
+        } else {
+            console.log("No tiene creditos para jugar");
+        }console.log("credito usuario:" + pJugador.getCredito());
     }
 }
-

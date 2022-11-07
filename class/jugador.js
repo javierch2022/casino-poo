@@ -2,11 +2,11 @@
 exports.__esModule = true;
 exports.Jugador = void 0;
 var readlineSync = require('readline-sync');
-//readlineSync.question("Ingrese su nombre por favor : ");
 var Jugador = /** @class */ (function () {
     function Jugador() {
         this.nombre = readlineSync.question("Ingrese su nombre por favor : ");
-        this.credito = readlineSync.question("Ingrese cantidad de credito a cargar : ");
+        this.dinero = Number(readlineSync.question("Ingrese el dinero del jugador: "));
+        this.credito = 0;
     }
     /////////////// get and set //////////////
     Jugador.prototype.getNombre = function () {
@@ -21,14 +21,14 @@ var Jugador = /** @class */ (function () {
     Jugador.prototype.setCredito = function (pCredito) {
         this.credito = pCredito;
     };
-    /////////////////// methodos /////////////////
-    Jugador.prototype.nombreJugador = function () {
-        var nombre = readlineSync.question("Ingrese su nombre por favor : ");
-        return nombre;
+    Jugador.prototype.getDinero = function () {
+        return this.dinero;
+    };
+    Jugador.prototype.setDinero = function (pDinero) {
+        {
+            this.dinero = pDinero;
+        }
     };
     return Jugador;
 }());
 exports.Jugador = Jugador;
-var test1 = new Jugador();
-console.log("jugador : " + test1.getNombre() + "Usted Cargo : " + test1.getCredito() + "creditos");
-console.log("Usted Cargo" + test1.getNombre());

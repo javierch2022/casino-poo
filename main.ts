@@ -1,40 +1,27 @@
 import {Casino} from './class/casino';
 import {Juego} from './class/juego';
+import { BlackJack } from './class/juegos/blackjack/blackJack';
+import { Ruleta } from './class/juegos/ruleta/ruleta';
 import { Jugador } from './class/jugador';
 
-
-/*
-let el21 : BlackJack = new BlackJack("el21",1000,10);
-
-el21.jugar();
-el21.jugar();
-el21.jugar();
-el21.jugar();
-el21.jugar();
-
-// console log
-*/
-
-
-/*let test :Tragamonedas = new Tragamonedas('TripleDiamante', 1000, 10, 3, 3);
-
-
-test.Jugar();
-test.Jugar();
-test.Jugar();
-
-*/
-
-
-
 // variables para jugador
-let testJugador = new Jugador();
+/* let testJugador = new Jugador();
 
 
 console.log(testJugador);
 
 
+*/
+let testBlackJack : Juego = new BlackJack ("El21",5000,2); // sacar pmontoApos
+let testRuleta : Juego = new Ruleta ("Ruleta loca",5000,2);
+let juegos : Juego [] = [testBlackJack,testRuleta];
+let HardRock : Casino = new Casino("HardRock",juegos,1000,2000);
 
 
 
+let jugador: Jugador = HardRock.ingresaJugador();
+HardRock.pesosACreditos();
+HardRock.getJuegos()[1].jugar(jugador);
+HardRock.getJuegos()[1].jugar(jugador);
+HardRock.getJuegos()[1].jugar(jugador);
 

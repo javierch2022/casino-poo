@@ -2,18 +2,20 @@ import { BlackJack } from "./juegos/blackjack/blackJack";
 import { Ruleta } from "./juegos/ruleta/ruleta";
 import { Tragamonedas } from "./juegos/tragamonedas/tragamonedas";
 import { Casino } from "./casino";
+import { Jugador } from "./jugador";
 
 
-export class Juego {
+
+export abstract class Juego {
     protected nombre: string; 
     protected credito: number;
     protected montoApostado: number;
     protected pagoCasa: number;
 
-    constructor(pNombre: string,pCredito: number, pMontoApostado: number, pPagoCasa: number) {
+    constructor(pNombre: string,pCredito: number, pPagoCasa: number) {
         this.nombre = pNombre;
         this.credito = pCredito;
-        this.montoApostado = pMontoApostado;
+        this.montoApostado = 0;
         this.pagoCasa = pPagoCasa;
     }
 
@@ -37,20 +39,23 @@ export class Juego {
     }
     /*---------------metodos---------------*/
 
-    public pagarApuesta(pCredito: number): void { /* Visto desde el CASINO */
+    public pagarApuesta(pCredito: number,pJugador:Jugador): void { /* Visto desde el CASINO */
+        pJugador.setCredito(pJugador.getCredito() + (pCredito * this.pagoCasa));
         this.credito += pCredito * this.pagoCasa;
     }
-    public cobrarApuesta(pCredito: number): void {
+    public cobrarApuesta(pCredito: number,pJugador:Jugador): void {
+        pJugador.setCredito(pJugador.getCredito() - (pCredito/* * this.pagoCasa*/));
         this.credito -= pCredito;
     }
 
-    public validarCreditos() {
-        if (this.credito > 0) {
+    public validarCreditos(jugador : Jugador) {
+        if (jugador.getCredito() > 0) {
             return true;
         } else {
-            return false;
+            return false; // devuelve al menu inicial o cargar credito
         }
     }
+    abstract jugar(jugador:Jugador);
 }
 
 

@@ -3,14 +3,14 @@ var readlineSync = require('readline-sync');
 export class Jugador {
     
     protected nombre:string;
-    protected dinero: number;
-    protected credito: number;
+    protected dinero: number; // efectivo
+    protected credito: number; // creditos que le da el casino al cambiar dinero
 
     constructor(){
 
         this.nombre = readlineSync.question("Ingrese su nombre por favor : ");
         this.dinero = Number(readlineSync.question("Ingrese el dinero del jugador: "));
-        this.credito = 0;
+        this.credito = 0; 
     }
 
     /////////////// get and set //////////////
@@ -26,8 +26,14 @@ export class Jugador {
     }
     public setCredito(pCredito:number){
         this.credito = pCredito;
-       
     }
+    public getDinero(): number{
+        return this.dinero;
+    }
+    public setDinero(pDinero:number){{
+        this.dinero = pDinero;
+    }
+}
 /////////////////// methodos /////////////////
 }
   
