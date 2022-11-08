@@ -44,39 +44,39 @@ export class Casino{
     }
     //---metodos---//
     public pesosACreditos(){
-            console.log("dinero inicial jugador: " + this.jugador.getDinero());
+            /*console.log("dinero inicial jugador: " + this.jugador.getDinero());
             console.log("credito inicial jugador: " + this.jugador.getCredito());
             console.log("dinero inicial casino: " + this.bancaDinero);
-            console.log("credito inicial casino: " + this.bancaCredito);
+            console.log("credito inicial casino: " + this.bancaCredito);*/
         let dineroAConsultar = Number(readlineSync.question("Ingrese la cantidad de dinero a cambiar por creditos: "));
         if(dineroAConsultar <= this.jugador.getDinero()){
             this.jugador.setDinero(this.jugador.getDinero() - dineroAConsultar);
             this.jugador.setCredito(dineroAConsultar *2);
             this.bancaDinero += dineroAConsultar;
             this.bancaCredito -= dineroAConsultar *2;
-            console.log("dinero jugador: " + this.jugador.getDinero());
+            /*console.log("dinero jugador: " + this.jugador.getDinero());
             console.log("credito jugador: " + this.jugador.getCredito());
             console.log("dinero casino: " + this.bancaDinero);
-            console.log("credito casino: " + this.bancaCredito);
+            console.log("credito casino: " + this.bancaCredito);*/
         }else{
             console.log("usted no posee el dinero suficiente"); // derivar a menu de inicio.
         }
     }
     public creditosAPesos(){
-        console.log("dinero inicial jugador: " + this.jugador.getDinero());
+        /*console.log("dinero inicial jugador: " + this.jugador.getDinero());
         console.log("credito inicial jugador: " + this.jugador.getCredito());
         console.log("dinero inicial casino: " + this.bancaDinero);
-        console.log("credito inicial casino: " + this.bancaCredito);
+        console.log("credito inicial casino: " + this.bancaCredito);*/
     let creditoAConsultar = Number(readlineSync.question("Ingrese la cantidad de creditos a cambiar por dinero: "));
     if(creditoAConsultar <= this.jugador.getCredito()){
         this.jugador.setDinero(this.jugador.getDinero() + (creditoAConsultar / 2));
         this.jugador.setCredito(this.jugador.getCredito() - (creditoAConsultar));
         this.bancaDinero -= (creditoAConsultar / 2);
         this.bancaCredito += creditoAConsultar;
-        console.log("dinero jugador: " + this.jugador.getDinero());
+       /* console.log("dinero jugador: " + this.jugador.getDinero());
         console.log("credito jugador: " + this.jugador.getCredito());
         console.log("dinero casino: " + this.bancaDinero);
-        console.log("credito casino: " + this.bancaCredito);
+        console.log("credito casino: " + this.bancaCredito);*/
     }else{
         console.log("usted no posee los creditos suficientes"); // derivar a menu de inicio.
     }

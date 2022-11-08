@@ -1,2 +1,13 @@
-1- ruleta : no se definio "apuesta"
-2- blackjack : DEFINIR COMO SE TRATARA "CARTA"
+1 - generar interaccion via menu (javi tiene el menu diseñado)
+2 - limpiar las clases de codigo residual (excepto ruleta)
+3 - limpiar console.log innecesarios
+4 - agregar y darle glamur a los console.log necesarios
+5 - agregar libreria para cargar valores por txt y exportar estadisticas
+
+6 - agregar reglas en cada juego.
+7 - Calcular probabilidad de ganar de cada juego
+8 - Guardar en txt las estadisticas
+
+terminado : 
+tragamonedas TripleDiamante
+tragamonedas Zeus

@@ -51,7 +51,7 @@ export class BlackJack extends Juego {
     }
 
     public quiereCarta(): boolean {
-        let otraCarta = readlineSync.question("¿quiere otra carta? (s/n): ");
+        let otraCarta = readlineSync.question("quiere otra carta? (s/n): ");
         if (otraCarta == "s" || otraCarta == "S") {
             return true;
         } else {
@@ -62,49 +62,80 @@ export class BlackJack extends Juego {
     public jugar(pJugador: Jugador): void {
         let jugador: number = 0; // suma de cartas 
         let computadora: number = 0; // suma de cartas
-        console.log("creditos del jugador=??" + this.validarCreditos(pJugador))
+        do {
+            console.clear();
+            console.log("___________________________________________________________");
+            console.log("             Bienvenido a " + this.getNombre());
+            console.log("___________________________________________________________");
+            console.log("");
+            console.log("Creditos : " + pJugador.getCredito());
+            console.log("");
 
-        if (this.validarCreditos(pJugador)) {
-            this.montoApostado = Number(readlineSync.question("¿cuantos creditos desea apostar?: "));
-            if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
-                jugador += this.entregarCarta();
-                console.log("jugador: " + jugador);
-                while (jugador <= 21 && this.quiereCarta()) {
+            if (this.validarCreditos(pJugador)) {
+                this.montoApostado = Number(readlineSync.question("Cuantos creditos desea apostar?: "));
+                console.log("");
+                if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
                     jugador += this.entregarCarta();
-                    console.log("jugador: " + jugador);
-                }
-                if (jugador != 0) {
-                    let carta = 0;
-                    let jugadorGana: boolean = true;
-                    while (computadora <= 20 && (computadora < 17 || Math.round(Math.random() * (1 - 0) + 0)) && jugadorGana) {
-                        carta++;
-                        computadora += this.entregarCarta();
-                        if (jugador > 21 && carta > 2 && computadora >= 17) {
-                            jugadorGana = false;
-                        }
-                        console.log("carta: " + carta);
-                        console.log("computadora: " + computadora);
+                    console.log("====================================");
+                    console.log("Valor carta inicial: " + jugador);
+                    console.log("");
+                    while (jugador <= 21 && this.quiereCarta()) {
+                        jugador += this.entregarCarta();
+                        console.log("______________________________________");
+                        console.log("");
+                        console.log("Valor carta acumulada del jugador : " + jugador);
+                        console.log("");
                     }
-                }
-                //se paga con creditos
-                if ((jugador <= 21 && jugador > computadora) || (jugador < computadora && computadora > 21)) {
-                    console.log("jugador gana");
-                    console.log("monto apostado" + this.montoApostado);
-                    this.pagarApuesta(this.montoApostado, pJugador);
-                } else if ((computadora <= 21 && computadora > jugador) || (jugador > computadora && jugador > 21)) {
-                    console.log("gana la casa, el jugador pierde");
-                    console.log("monto apostado" + this.montoApostado);
-                    this.cobrarApuesta(this.montoApostado, pJugador);
+                    if (jugador != 0) {
+                        let carta = 0;
+                        let jugadorGana: boolean = true;
+                        console.log("=====================================");
+                        while (computadora <= 20 && (computadora < 17 || Math.round(Math.random() * (1 - 0) + 0)) && jugadorGana) {
+                            carta++;
+                            computadora += this.entregarCarta();
+                            if (jugador > 21 && carta > 2 && computadora >= 17) {
+                                jugadorGana = false;
+                            }
+                           
+                            console.log("");
+                            console.log("computadora: " + computadora);
+                           
+                        }
+                    }
+                    //se paga con creditos
+                    if ((jugador <= 21 && jugador > computadora) || (jugador < computadora && computadora > 21)) {
+                        console.log("");
+                        console.log("*********************************");
+                        console.log("          Jugador Gana");
+                        console.log("*********************************");
+                        this.pagarApuesta(this.montoApostado, pJugador);
+                    } else if ((computadora <= 21 && computadora > jugador) || (jugador > computadora && jugador > 21)) {
+                        console.log("");
+                        console.log("*********************************");
+                        console.log(" Gana la casa, el jugador pierde ");
+                        console.log("*********************************");
+                        
+                        this.cobrarApuesta(this.montoApostado, pJugador);
+                    } else {
+                        console.log("");
+                        console.log("*********************************");
+                        console.log("           Empate");
+                        console.log("*********************************");
+                    }
                 } else {
-                    console.log("empate");
+                    console.log("su apuesta excede los creditos que tiene");
+                    console.log("");
                 }
             } else {
-                console.log("su apuesta excede los creditos que tiene");
+                console.log("No tiene creditos para jugar");
+                console.log("");
             }
-        } else {
-            console.log("No tiene creditos para jugar");
-        }
-
-        console.log("credito usuario:" + pJugador.getCredito());
+            console.log("");
+            console.log("Creditos disponible para jugar : " + pJugador.getCredito());
+            console.log("_____________________________________");
+            console.log("");
+            
+            jugador = computadora = 0;
+        } while (Number(readlineSync.question("Seleccion 1 para Salir y 0 para volver a jugar: ")) === 0);
     }
 }

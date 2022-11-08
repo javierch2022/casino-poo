@@ -169,92 +169,102 @@ export class Ruleta extends Juego {
         return Math.round(Math.random() * (36 - 0) + 0);
     }
     public jugar(pJugador: Jugador): void {
-        console.log("creditos del jugador=??" + this.validarCreditos(pJugador))
-        if (this.validarCreditos(pJugador)) {
-            this.montoApostado = Number(readlineSync.question("¿cuantos creditos desea apostar?: "));
-            let parImpar: number = Number(readlineSync.question("Seleccione 0 para Par o 1 para Impar: "));
+        do {
+            console.clear();
+            console.log("___________________________________________________________");
+            console.log("             Bienvenido a " + this.getNombre());
+            console.log("___________________________________________________________");
+            console.log("");
+            console.log("Creditos : " + pJugador.getCredito());
+            console.log("");
 
-            if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
-                /*if (this.ubicacionApuesta.length > 0) {
-                    for (let i: number = 0; i < this.ubicacionApuesta.length; i++) {
-                        let numeroApostado: number = this.ubicacionApuesta[i].getNumeroApostado();
-                        let creditoApostado: number = this.ubicacionApuesta[i].getCreditoApuesta();*/
-                let numeroRuleta: number = this.girarRuleta();
-                console.log("Numero Ruleta: " + numeroRuleta);
-                let ruletaParImpar: number = numeroRuleta % 2;
-                console.log("Ruleta PAr / Impar: " + ruletaParImpar);
-                if (numeroRuleta === 0) {
-                    console.log("0 no es par ni impar");
-                    this.cobrarApuesta(this.montoApostado, pJugador);
-                }
-                else if (ruletaParImpar === parImpar) { //si es par paga 
-                    console.log("Gano");
-                    this.pagarApuesta(this.montoApostado, pJugador);
+            console.log("creditos del jugador=??" + this.validarCreditos(pJugador))
+            if (this.validarCreditos(pJugador)) {
+                this.montoApostado = Number(readlineSync.question("¿cuantos creditos desea apostar?: "));
+                let parImpar: number = Number(readlineSync.question("Seleccione 0 para Par o 1 para Impar: "));
+
+                if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
+                    /*if (this.ubicacionApuesta.length > 0) {
+                        for (let i: number = 0; i < this.ubicacionApuesta.length; i++) {
+                            let numeroApostado: number = this.ubicacionApuesta[i].getNumeroApostado();
+                            let creditoApostado: number = this.ubicacionApuesta[i].getCreditoApuesta();*/
+                    let numeroRuleta: number = this.girarRuleta();
+                    console.log("Numero Ruleta: " + numeroRuleta);
+                    let ruletaParImpar: number = numeroRuleta % 2;
+                    console.log("Ruleta PAr / Impar: " + ruletaParImpar);
+                    if (numeroRuleta === 0) {
+                        console.log("0 no es par ni impar");
+                        this.cobrarApuesta(this.montoApostado, pJugador);
+                    }
+                    else if (ruletaParImpar === parImpar) { //si es par paga 
+                        console.log("Gano");
+                        this.pagarApuesta(this.montoApostado, pJugador);
+                    } else {
+                        console.log("Perdió");
+                        this.cobrarApuesta(this.montoApostado, pJugador);
+                    }
+                    /*if (numeroApostado == pGirarRuleta) {*/
+                    //verifico si numeroApostado pertenece a listaNumerosRojos*/
+                    /*
+                    if (this.getListaNumerosRojos().includes(numeroApostado)) {
+                        this.pagarApuesta(this.montoApostado, pJugador);
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a listaNumerosNegros
+                    if (this.getListaNumerosNegros().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a primeraDocena
+                    if (this.getListaPrimeraDocena().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a segundaDocena
+                    if (this.getListaSegundaDocena().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a terceraDocena
+                    if (this.getListaTerceraDocena().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a primeraColumna
+                    if (this.getListaPrimeraColumna().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a segundaColumna
+                    if (this.getListaSegundaColumna().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a tercerColumna
+                    if (this.getListaTercerColumna().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a lista1a18
+                    if (this.getLista1a18().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
+                    //verifico si numeroApostado pertenece a lista19a36
+                    if (this.getLista19a36().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };*/
+                    //verifico si numeroApostado pertenece a listaPar
+                    /*if (this.getListaPar().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };*/
+                    //verifico si numeroApostado pertenece a listaImpar*/
+                    /*if (this.getListaImpar().includes(numeroApostado)) {
+                        this.pagarApuesta(creditoApostado * 2)
+                    };
                 } else {
-                    console.log("Perdió");
-                    this.cobrarApuesta(this.montoApostado, pJugador);
+                    this.cobrarApuesta(creditoApostado);
                 }
-                /*if (numeroApostado == pGirarRuleta) {*/
-                //verifico si numeroApostado pertenece a listaNumerosRojos*/
-                /*
-                if (this.getListaNumerosRojos().includes(numeroApostado)) {
-                    this.pagarApuesta(this.montoApostado, pJugador);
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a listaNumerosNegros
-                if (this.getListaNumerosNegros().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a primeraDocena
-                if (this.getListaPrimeraDocena().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a segundaDocena
-                if (this.getListaSegundaDocena().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a terceraDocena
-                if (this.getListaTerceraDocena().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a primeraColumna
-                if (this.getListaPrimeraColumna().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a segundaColumna
-                if (this.getListaSegundaColumna().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a tercerColumna
-                if (this.getListaTercerColumna().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a lista1a18
-                if (this.getLista1a18().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-                //verifico si numeroApostado pertenece a lista19a36
-                if (this.getLista19a36().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };*/
-                //verifico si numeroApostado pertenece a listaPar
-                /*if (this.getListaPar().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };*/
-                //verifico si numeroApostado pertenece a listaImpar*/
-                /*if (this.getListaImpar().includes(numeroApostado)) {
-                    this.pagarApuesta(creditoApostado * 2)
-                };
-            } else {
-                this.cobrarApuesta(creditoApostado);
             }
-        }
-    }*/
+        }*/
+                } else {
+                    console.log("su apuesta excede los creditos que tiene");
+                }
             } else {
-                console.log("su apuesta excede los creditos que tiene");
-            }
-        } else {
-            console.log("No tiene creditos para jugar");
-        } console.log("credito usuario:" + pJugador.getCredito());
+                console.log("No tiene creditos para jugar");
+            } console.log("credito usuario:" + pJugador.getCredito());
+        } while (Number(readlineSync.question("Seleccion 1 para Salir y 0 para volver a jugar: ")) === 0);
     }
 }
