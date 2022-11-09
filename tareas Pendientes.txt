@@ -1,13 +1,18 @@
-1 - generar interaccion via menu (javi tiene el menu diseñado)
 2 - limpiar las clases de codigo residual (excepto ruleta)
-3 - limpiar console.log innecesarios
-4 - agregar y darle glamur a los console.log necesarios
-5 - agregar libreria para cargar valores por txt y exportar estadisticas
-
-6 - agregar reglas en cada juego.
+5 - agregar libreria para cargar valores por txt y exportar estadistica
 7 - Calcular probabilidad de ganar de cada juego
 8 - Guardar en txt las estadisticas
-
+9 - tragamonedas automatico (si inicia en tiro manual, no funciona automatico)
 terminado : 
-tragamonedas TripleDiamante
-tragamonedas Zeus
+6 - ruleta, blackjack,
+7 - documentacion del proyecto
+8 - corregir UML
+
+
+
+librerias necesarias para ejecutar : 
+readline-sync npm i readline-sync
+type npm install --save @types/node
+colors npm install colors
+node v18 (ultima version disponible)
+

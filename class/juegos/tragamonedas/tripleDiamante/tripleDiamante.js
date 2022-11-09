@@ -17,33 +17,68 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.TripleDiamante = void 0;
 var readlineSync = require('readline-sync');
+var colors = require('colors/safe');
 var tragamonedas_1 = require("../tragamonedas");
 var TripleDiamante = /** @class */ (function (_super) {
     __extends(TripleDiamante, _super);
     function TripleDiamante() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    //////////////////// metodo   Automatico
+    // tragamonedas con metodo manual/Automatico
     TripleDiamante.prototype.jugar = function (pJugador) {
         var ventana = [];
-        var finAutomatico = 0;
-        var cantidadDeTiros = 0;
+        var finAutomatico;
+        var cantidadDeTiros;
         do {
+            cantidadDeTiros = 0;
+            finAutomatico = 0;
             console.clear();
-            console.log("___________________________________________________________");
-            console.log("       Bienvenido a Tragamonedas " + this.getNombre());
-            console.log("___________________________________________________________");
+            console.log(colors.green("________________________________________________________________"));
             console.log("");
-            console.log("Creditos disponible para jugar : " + pJugador.getCredito());
+            console.log("             Bienvenido a " + this.getNombre());
+            console.log(colors.green("________________________________________________________________"));
             console.log("");
+            console.log("Creditos : " + pJugador.getCredito());
+            console.log("");
+            console.log(colors.green("________________________________________________________________"));
+            console.log("");
+            console.log("                   Reglas del Tragamonedas                   ");
+            console.log("");
+            console.log("");
+            console.log(" El jugador coloca los creditos a apostar y oprime el boton ");
+            console.log(" 'jugar' .El boton hace girar los rodillos, si las figuras  ");
+            console.log(" de los rodillos coinciden, el jugador gana un cierto numero");
+            console.log(" de creditos");
+            console.log("");
+            console.log("                          El juego            ");
+            console.log("");
+            console.log("");
+            console.log(" El tragamonedas Triple Diamante, cuenta con la opcion de  ");
+            console.log(" tiros multiples  y automaticos a la vez.  ");
+            console.log("");
+            console.log(" Ejemplos de jugadas : ");
+            console.log("");
+            console.log("            combinacion ganadora  [ 3,3,3 ]");
+            console.log("                 Premia 3 coincidencias");
+            console.log("");
+            console.log("            combinacion ganadora  [ 1,2,1 ]");
+            console.log("                 Premia 2 coincidencias");
+            console.log("");
+            console.log("            combinacion perdedora  [ 1,2,3 ]");
+            console.log("                 Pierde 0 coincidencias");
+            console.log("");
+            console.log(colors.green("________________________________________________________________"));
+            console.log("");
+            console.log(" Probabilidad de ganar es: 80,76%");
+            console.log(colors.green("________________________________________________________________"));
+            ;
             if (this.validarCreditos(pJugador)) {
-                console.log("---------------------------------------------");
+                console.log("");
                 this.montoApostado = Number(readlineSync.question("Cuantos creditos desea apostar?: "));
-                console.log("---------------------------------------------");
+                console.log(colors.yellow("________________________________________________________________"));
                 console.log("");
-                cantidadDeTiros = Number(readlineSync.question("Seleccione 1 para modo Automatico(3 tiros) o 0 para Manual: "));
+                cantidadDeTiros = Number(readlineSync.question("Seleccione >> 1 << para (3 tiros) o >> 0 << para Manual: "));
                 console.log("");
-                console.log("**************************************");
                 if (cantidadDeTiros === 1) {
                     cantidadDeTiros = 3;
                 }
@@ -53,18 +88,20 @@ var TripleDiamante = /** @class */ (function (_super) {
                             for (var i = 0; i < this.cantidadRodillo; i++) {
                                 ventana.push(this.girarRodillo());
                             }
-                            console.log("_____________________________________");
-                            console.log("=== Tragamonedas Triple Diamante  ===");
-                            console.log("_____________________________________");
+                            console.log(colors.yellow("************************  RESULTADO  ***************************"));
                             console.log("");
-                            console.log(">>>>>>>>>>>>> [ " + ventana + " ] <<<<<<<<<<<<<");
+                            console.log("                          [ " + ventana + " ] ");
+                            console.log("");
+                            console.log(colors.yellow("****************************************************************"));
                             var contador = new Array(this.cantidadRodillo);
                             contador.fill(0);
+                            /* ventana por contador no va ---- VER */
                             for (var i = 0; i < ventana.length; i++) {
                                 contador[ventana[i] - 1]++;
                             }
                             var maximo = 0;
                             var posicion = 0;
+                            /* ventana por contador no va ---- VER */
                             for (var i = 0; i < ventana.length; i++) {
                                 if (contador[i] > maximo) {
                                     maximo = contador[i];
@@ -72,23 +109,34 @@ var TripleDiamante = /** @class */ (function (_super) {
                                 }
                             }
                             if (maximo === this.cantidadRodillo) {
-                                this.pagarApuesta(this.montoApostado * 1.5, pJugador);
+                                this.pagarApuesta((this.montoApostado * 1), pJugador);
                                 console.log("");
-                                console.log("Ud. tuvo " + this.cantidadRodillo + " coincidencia/s");
+                                console.log(colors.green("****************************************************************"));
+                                console.log("                 Jugador GANA con " + this.cantidadRodillo + " coincidencia/s");
+                                console.log("");
+                                console.log(colors.green("****************************************************************"));
+                                console.log("");
                             }
                             else if (maximo === (this.cantidadRodillo - 1)) {
-                                this.pagarApuesta(this.montoApostado, pJugador);
+                                this.pagarApuesta((this.montoApostado * 0.5), pJugador);
                                 console.log("");
-                                console.log("Ud. tuvo " + (this.cantidadRodillo - 1) + " coincidencia/s.");
+                                console.log(colors.green("****************************************************************"));
+                                console.log("                 Jugador GANA con " + (this.cantidadRodillo - 1) + " coincidencia/s.");
+                                console.log("");
+                                console.log(colors.green("****************************************************************"));
+                                console.log("");
                             }
                             else {
                                 this.cobrarApuesta(this.montoApostado, pJugador);
                                 console.log("");
-                                console.log("Ud. Pierde");
+                                console.log(colors.red("****************************************************************"));
+                                console.log("                       JUGADOR PIERDE ");
+                                console.log("");
+                                console.log(colors.red("****************************************************************"));
+                                console.log("");
                             }
-                            console.log("");
                             console.log("Creditos disponible para jugar : " + pJugador.getCredito());
-                            console.log("_____________________________________");
+                            console.log(colors.yellow("________________________________________________________________"));
                             console.log("");
                             finAutomatico++;
                         }
@@ -96,7 +144,7 @@ var TripleDiamante = /** @class */ (function (_super) {
                     } while (finAutomatico < cantidadDeTiros);
                 }
             }
-        } while (Number(readlineSync.question("Seleccion 1 para Salir y 0 para volver a jugar: ")) === 0);
+        } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
     };
     return TripleDiamante;
 }(tragamonedas_1.Tragamonedas));

@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.BlackJack = void 0;
 var readlineSync = require('readline-sync');
+var colors = require('colors/safe');
 var juego_1 = require("../../juego");
 var ApuestaBlackJack = /** @class */ (function () {
     function ApuestaBlackJack(creditoApuesta) {
@@ -65,31 +66,59 @@ var BlackJack = /** @class */ (function (_super) {
         var computadora = 0; // suma de cartas
         do {
             console.clear();
-            console.log("___________________________________________________________");
+            console.log(colors.green("________________________________________________________________"));
             console.log("             Bienvenido a " + this.getNombre());
-            console.log("___________________________________________________________");
+            console.log(colors.green("________________________________________________________________"));
             console.log("");
             console.log("Creditos : " + pJugador.getCredito());
+            console.log("");
+            console.log(colors.green("________________________________________________________________"));
+            console.log("");
+            console.log("                   Reglas del Black Jack                   ");
+            console.log("");
+            console.log("");
+            console.log(" El Black Jack es uno de los juegos mas populares del Casino.");
+            console.log(" El Objetivo es simple: ganarle al Croupier obteniendo el ");
+            console.log(" puntaje mas cercano a 21, las figuras valen 10 y las cartas ");
+            console.log(" conservan su valor. El Black Jack se produce cuando las 2(2) ");
+            console.log("  primeras cartas son un diez o cualquier figura mas un As.");
+            console.log("");
+            console.log("");
+            console.log("                          El juego            ");
+            console.log("");
+            console.log("");
+            console.log(" Se entrega 1 carta al jugador, entonces el Croupier preguntara");
+            console.log(" siquiere otra carta. Si sus cartas totalizan un valor mas ");
+            console.log(" cercano a 21que las del Croupier, usted gana y se le paga el ");
+            console.log(" valor de la apuesta x 2. ");
+            console.log(" El Courpier debera debera plantarce con un total de 17 o mas y");
+            console.log(" debera tomar una carta mas si tiene 16 o menos.");
+            console.log("");
+            console.log(colors.green("________________________________________________________________"));
+            console.log("");
+            console.log(" Probabilidad de ganar es: ????%");
+            console.log("");
+            console.log(colors.green("________________________________________________________________"));
             console.log("");
             if (this.validarCreditos(pJugador)) {
                 this.montoApostado = Number(readlineSync.question("Cuantos creditos desea apostar?: "));
                 console.log("");
                 if (this.montoApostado > 0 && this.montoApostado <= pJugador.getCredito()) {
                     jugador += this.entregarCarta();
-                    console.log("====================================");
+                    console.log(colors.yellow("________________________________________________________________"));
                     console.log("Valor carta inicial: " + jugador);
                     console.log("");
                     while (jugador <= 21 && this.quiereCarta()) {
                         jugador += this.entregarCarta();
-                        console.log("______________________________________");
+                        console.log(colors.yellow("________________________________________________________________"));
                         console.log("");
-                        console.log("Valor carta acumulada del jugador : " + jugador);
+                        console.log("Valor de cartas acumuladas del jugador : " + jugador);
                         console.log("");
                     }
                     if (jugador != 0) {
                         var carta = 0;
                         var jugadorGana = true;
-                        console.log("=====================================");
+                        console.log(colors.yellow("________________________________________________________________"));
                         while (computadora <= 20 && (computadora < 17 || Math.round(Math.random() * (1 - 0) + 0)) && jugadorGana) {
                             carta++;
                             computadora += this.entregarCarta();
@@ -97,29 +126,32 @@ var BlackJack = /** @class */ (function (_super) {
                                 jugadorGana = false;
                             }
                             console.log("");
-                            console.log("computadora: " + computadora);
+                            console.log("Valor de cartas acumuladas del Crupier: " + computadora);
                         }
                     }
                     //se paga con creditos
                     if ((jugador <= 21 && jugador > computadora) || (jugador < computadora && computadora > 21)) {
                         console.log("");
-                        console.log("*********************************");
-                        console.log("          Jugador Gana");
-                        console.log("*********************************");
+                        console.log(colors.green("****************************************************************"));
+                        console.log("                         JUGADOR GANA");
+                        console.log("");
+                        console.log(colors.green("****************************************************************"));
                         this.pagarApuesta(this.montoApostado, pJugador);
                     }
                     else if ((computadora <= 21 && computadora > jugador) || (jugador > computadora && jugador > 21)) {
                         console.log("");
-                        console.log("*********************************");
-                        console.log(" Gana la casa, el jugador pierde ");
-                        console.log("*********************************");
+                        console.log(colors.red("****************************************************************"));
+                        console.log("                 GANA LA CASA, JUGADOR PIERDE ");
+                        console.log("");
+                        console.log(colors.red("****************************************************************"));
                         this.cobrarApuesta(this.montoApostado, pJugador);
                     }
                     else {
                         console.log("");
-                        console.log("*********************************");
-                        console.log("           Empate");
-                        console.log("*********************************");
+                        console.log(colors.yellow("****************************************************************"));
+                        console.log("                             EMPATE");
+                        console.log("");
+                        console.log(colors.yellow("****************************************************************"));
                     }
                 }
                 else {
@@ -133,10 +165,10 @@ var BlackJack = /** @class */ (function (_super) {
             }
             console.log("");
             console.log("Creditos disponible para jugar : " + pJugador.getCredito());
-            console.log("_____________________________________");
+            console.log(colors.yellow("________________________________________________________________"));
             console.log("");
             jugador = computadora = 0;
-        } while (Number(readlineSync.question("Seleccion 1 para Salir y 0 para volver a jugar: ")) === 0);
+        } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
     };
     return BlackJack;
 }(juego_1.Juego));
