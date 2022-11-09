@@ -1,16 +1,13 @@
-2 - limpiar las clases de codigo residual (excepto ruleta)
 5 - agregar libreria para cargar valores por txt y exportar estadistica
-7 - Calcular probabilidad de ganar de cada juego
+7 - Calcular probabilidad de ganar de cada juego (?)
 8 - Guardar en txt las estadisticas
-9 - tragamonedas automatico (si inicia en tiro manual, no funciona automatico)
-terminado : 
-6 - ruleta, blackjack,
-7 - documentacion del proyecto
-8 - corregir UML
+9- documentacion del proyecto 
+10 - corregir UML
 
 
 
 librerias necesarias para ejecutar : 
+
 readline-sync npm i readline-sync
 type npm install --save @types/node
 colors npm install colors
