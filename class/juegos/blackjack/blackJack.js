@@ -18,36 +18,13 @@ exports.__esModule = true;
 exports.BlackJack = void 0;
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 var juego_1 = require("../../juego");
-var ApuestaBlackJack = /** @class */ (function () {
-    function ApuestaBlackJack(creditoApuesta) {
-        this.creditoApuesta = creditoApuesta;
-    }
-    return ApuestaBlackJack;
-}());
 var BlackJack = /** @class */ (function (_super) {
     __extends(BlackJack, _super);
     function BlackJack(pNombre, pCredito, pPagoCasa) {
-        var _this = _super.call(this, pNombre, pCredito, pPagoCasa) || this;
-        _this.totalCartas = 52;
-        _this.numeroCartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-        _this.pedirCartas = false;
-        _this.noMasCartas = false;
-        return _this;
+        return _super.call(this, pNombre, pCredito, pPagoCasa) || this;
     }
-    //--------get & set-------//
-    BlackJack.prototype.setPedirCartas = function () {
-        this.pedirCartas = true;
-    };
-    BlackJack.prototype.getPedirCartas = function () {
-        return this.pedirCartas;
-    };
-    BlackJack.prototype.setNoMasCartas = function () {
-        this.noMasCartas = true;
-    };
-    BlackJack.prototype.getNoMasCartas = function () {
-        return this.noMasCartas;
-    };
     //--------metodos---------//
     BlackJack.prototype.entregarCarta = function () {
         return Math.round(Math.random() * (10 - 1) + 1);
@@ -62,6 +39,7 @@ var BlackJack = /** @class */ (function (_super) {
         }
     };
     BlackJack.prototype.jugar = function (pJugador) {
+        var creditoInicial = pJugador.getCredito();
         var jugador = 0; // suma de cartas 
         var computadora = 0; // suma de cartas
         do {
@@ -96,7 +74,7 @@ var BlackJack = /** @class */ (function (_super) {
             console.log("");
             console.log(colors.green("________________________________________________________________"));
             console.log("");
-            console.log(" Probabilidad de ganar es: ????%");
+            console.log(" Probabilidad de ganar es: 2% ");
             console.log("");
             console.log(colors.green("________________________________________________________________"));
             console.log("");
@@ -169,6 +147,8 @@ var BlackJack = /** @class */ (function (_super) {
             console.log("");
             jugador = computadora = 0;
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+        var creditoFinal = pJugador.getCredito();
+        fs.appendFileSync('./class/juegos/blackjack/blackjack-estadistica.txt', pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     };
     return BlackJack;
 }(juego_1.Juego));

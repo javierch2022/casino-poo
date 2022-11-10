@@ -1,3 +1,5 @@
+import * as fs from 'fs'
+
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
 
@@ -10,7 +12,6 @@ import { Zeus } from './class/juegos/tragamonedas/zeus/zeus';
 import { Jugador } from './class/jugador';
 
 
-
 let blackJackRock: Juego = new BlackJack("BlackJack Rock", 50000, 2);
 let ruletaRock: Juego = new Ruleta("Ruleta Rock", 50000, 2);
 let tripleDiamnte: Juego = new TripleDiamante("Triple Diamante", 5000, 1, 3, 3);
@@ -18,13 +19,56 @@ let zeus: Juego = new Zeus("Zeus", 50000, 10, 5, 5);
 let juegos: Juego[] = [blackJackRock, ruletaRock, zeus, tripleDiamnte];
 let HardRock: Casino = new Casino("HardRock", juegos, 1000, 2000);
 
+//////// BLOQUE PARA LEER ARCHIVO DE TEXTO NPM  @TYPES/NODE  ///////
+let bienvenida: string = fs.readFileSync('./intro.txt', 'utf8');
+let contenido:string[] = bienvenida.split('\r\n');
+let ingresar : string;
+
+function imprimeIntro (){
+console.log(contenido[1]);
+console.log(contenido[0]);
+console.log(contenido[1]);
+console.log(contenido[2]);
+console.log(contenido[3]);
+console.log(contenido[4]);
+console.log(contenido[1]);
+console.log(contenido[5]);
+console.log(contenido[1]);
+console.log(contenido[7]);
+console.log(contenido[8]);
+console.log(contenido[9]);
+console.log(contenido[10]);
+console.log(contenido[1]);
+console.log(contenido[12]);
+console.log(contenido[1]);
+console.log(contenido[14]);
+console.log(contenido[1]);
+console.log(contenido[16]);
+console.log(contenido[17]);
+console.log(contenido[18]);
+console.log(contenido[1]);
+console.log(contenido[19]);
+console.log(contenido[1]);
+console.log(contenido[21]);
+console.log(contenido[22]);
+console.log(contenido[23]);
+console.log(contenido[24]);
+console.log(contenido[1]);
+console.log(contenido[26]);
+console.log(contenido[1]);
+console.log(contenido[28]);
+console.log(contenido[1]);
+ingresar = readlineSync.question("presione ENTRER para ingresar");
+/////////////////////////////////////////////
+};
+
 function imprimePortada(){
     console.clear();
     console.log(colors.red("========================================================"));
     console.log("                      Casino " + HardRock.getNombre());
     console.log(colors.red("========================================================"));
 }
-
+imprimeIntro();
 imprimePortada();
 let jugador: Jugador = HardRock.ingresaJugador();
 imprimePortada();

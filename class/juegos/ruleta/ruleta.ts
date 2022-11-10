@@ -1,5 +1,6 @@
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 
 
 import { Juego } from "../../juego";
@@ -20,6 +21,7 @@ export class Ruleta extends Juego {
         return Math.round(Math.random() * (36 - 0) + 0);
     }
     public jugar(pJugador: Jugador): void {
+        let creditoInicial : number = pJugador.getCredito();
         do {
             console.clear();
             console.log(colors.green("________________________________________________________________"));
@@ -103,5 +105,9 @@ export class Ruleta extends Juego {
                 console.log(colors.yellow("****************************************************************"));
             } 
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+
+        let creditoFinal : number = pJugador.getCredito();
+
+        fs.appendFileSync('./class/juegos/ruleta/ruleta-estadistica.txt',pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     }
 }

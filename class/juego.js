@@ -32,7 +32,7 @@ var Juego = /** @class */ (function () {
         this.credito += pCredito * this.pagoCasa;
     };
     Juego.prototype.cobrarApuesta = function (pCredito, pJugador) {
-        pJugador.setCredito(pJugador.getCredito() - (pCredito /* * this.pagoCasa*/));
+        pJugador.setCredito(pJugador.getCredito() - (pCredito));
         this.credito -= pCredito;
     };
     Juego.prototype.validarCreditos = function (jugador) {

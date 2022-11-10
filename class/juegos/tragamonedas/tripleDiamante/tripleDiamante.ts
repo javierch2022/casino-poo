@@ -1,13 +1,15 @@
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 
 import { Tragamonedas } from "../tragamonedas";
 import { Jugador } from "../../../jugador";
 export class TripleDiamante extends Tragamonedas {
 
-    // tragamonedas con metodo manual/Automatico
+    //----tragamonedas con metodo manual/Automatico----//
 
     public jugar(pJugador: Jugador): void {
+        let creditoInicial : number = pJugador.getCredito();
         let ventana: number[] = [];
         let finAutomatico: number;
         let cantidadDeTiros: number;
@@ -81,15 +83,13 @@ export class TripleDiamante extends Tragamonedas {
                             let contador: number[] = new Array(this.cantidadRodillo);
                             contador.fill(0);
 
-                            /* ventana por contador no va ---- VER */
                            for (let i: number = 0; i < ventana.length; i++) {
                                 contador[ventana[i] - 1]++;
                             }
 
                             let maximo: number = 0;
                             let posicion: number = 0;
-
-                            /* ventana por contador no va ---- VER */                            
+                         
                             for (let i = 0; i < ventana.length; i++) {
 
                                 if (contador[i] > maximo) {
@@ -139,5 +139,9 @@ export class TripleDiamante extends Tragamonedas {
             }
            
         } while(Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+                
+        let creditoFinal : number = pJugador.getCredito();
+
+        fs.appendFileSync('./class/juegos/tragamonedas/tripleDiamante/tripleDiamante-estadistica.txt',pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     }
 }

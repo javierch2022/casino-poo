@@ -18,14 +18,16 @@ exports.__esModule = true;
 exports.Zeus = void 0;
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 var tragamonedas_1 = require("../tragamonedas");
 var Zeus = /** @class */ (function (_super) {
     __extends(Zeus, _super);
     function Zeus() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    //////////////////// metodo   Automatico
+    //----tragamonedas con metodo manual----//
     Zeus.prototype.jugar = function (pJugador) {
+        var creditoInicial = pJugador.getCredito();
         var ventana = [];
         var finAutomatico = 0;
         console.log("creditos del jugador=??" + this.validarCreditos(pJugador));
@@ -134,6 +136,8 @@ var Zeus = /** @class */ (function (_super) {
                 }
             }
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+        var creditoFinal = pJugador.getCredito();
+        fs.appendFileSync('./class/juegos/tragamonedas/zeus/zeus-estadistica.txt', pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     };
     return Zeus;
 }(tragamonedas_1.Tragamonedas));

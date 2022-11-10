@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var fs = require("fs");
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
 var casino_1 = require("./class/casino");
@@ -13,12 +14,55 @@ var tripleDiamnte = new tripleDiamante_1.TripleDiamante("Triple Diamante", 5000,
 var zeus = new zeus_1.Zeus("Zeus", 50000, 10, 5, 5);
 var juegos = [blackJackRock, ruletaRock, zeus, tripleDiamnte];
 var HardRock = new casino_1.Casino("HardRock", juegos, 1000, 2000);
+//////// BLOQUE PARA LEER ARCHIVO DE TEXTO NPM  @TYPES/NODE  ///////
+var bienvenida = fs.readFileSync('./intro.txt', 'utf8');
+var contenido = bienvenida.split('\r\n');
+var ingresar;
+function imprimeIntro() {
+    console.log(contenido[1]);
+    console.log(contenido[0]);
+    console.log(contenido[1]);
+    console.log(contenido[2]);
+    console.log(contenido[3]);
+    console.log(contenido[4]);
+    console.log(contenido[1]);
+    console.log(contenido[5]);
+    console.log(contenido[1]);
+    console.log(contenido[7]);
+    console.log(contenido[8]);
+    console.log(contenido[9]);
+    console.log(contenido[10]);
+    console.log(contenido[1]);
+    console.log(contenido[12]);
+    console.log(contenido[1]);
+    console.log(contenido[14]);
+    console.log(contenido[1]);
+    console.log(contenido[16]);
+    console.log(contenido[17]);
+    console.log(contenido[18]);
+    console.log(contenido[1]);
+    console.log(contenido[19]);
+    console.log(contenido[1]);
+    console.log(contenido[21]);
+    console.log(contenido[22]);
+    console.log(contenido[23]);
+    console.log(contenido[24]);
+    console.log(contenido[1]);
+    console.log(contenido[26]);
+    console.log(contenido[1]);
+    console.log(contenido[28]);
+    console.log(contenido[1]);
+    ingresar = readlineSync.question("presione ENTRER para ingresar");
+    /////////////////////////////////////////////
+}
+;
 function imprimePortada() {
     console.clear();
     console.log(colors.red("========================================================"));
     console.log("                      Casino " + HardRock.getNombre());
     console.log(colors.red("========================================================"));
 }
+imprimeIntro();
 imprimePortada();
 var jugador = HardRock.ingresaJugador();
 imprimePortada();

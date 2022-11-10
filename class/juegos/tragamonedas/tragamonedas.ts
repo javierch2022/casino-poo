@@ -1,14 +1,10 @@
-var readlineSync = require('readline-sync');
-
 import { Juego } from "../../juego";
 import { Jugador } from "../../jugador";
-import { Casino } from "../../casino";
 
 export abstract class Tragamonedas extends Juego {
 
     protected cantidadRodillo: number;
     protected cantidadFigura: number;
-    protected pagoCasa: number;
 
     constructor(pNombre: string, pCredito: number,pPagoCasa : number, pCantRodillo: number, pCantFigura: number) {
         super(pNombre, pCredito, pPagoCasa);

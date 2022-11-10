@@ -5,7 +5,9 @@ var readlineSync = require('readline-sync');
 var Jugador = /** @class */ (function () {
     function Jugador() {
         this.nombre = readlineSync.question("Ingrese su nombre por favor : ");
-        this.dinero = Number(readlineSync.question("Ingrese el dinero del jugador: "));
+        do {
+            this.dinero = Number(readlineSync.question("Ingrese el dinero del jugador: "));
+        } while (isNaN(this.dinero));
         this.credito = 0;
     }
     /////////////// get and set //////////////

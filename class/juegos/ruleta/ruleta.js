@@ -18,6 +18,7 @@ exports.__esModule = true;
 exports.Ruleta = void 0;
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 var juego_1 = require("../../juego");
 var Ruleta = /** @class */ (function (_super) {
     __extends(Ruleta, _super);
@@ -29,6 +30,7 @@ var Ruleta = /** @class */ (function (_super) {
         return Math.round(Math.random() * (36 - 0) + 0);
     };
     Ruleta.prototype.jugar = function (pJugador) {
+        var creditoInicial = pJugador.getCredito();
         do {
             console.clear();
             console.log(colors.green("________________________________________________________________"));
@@ -113,6 +115,8 @@ var Ruleta = /** @class */ (function (_super) {
                 console.log(colors.yellow("****************************************************************"));
             }
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+        var creditoFinal = pJugador.getCredito();
+        fs.appendFileSync('./class/juegos/ruleta/ruleta-estadistica.txt', pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     };
     return Ruleta;
 }(juego_1.Juego));

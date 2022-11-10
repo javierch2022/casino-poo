@@ -1,5 +1,6 @@
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 
 import { Tragamonedas } from "../tragamonedas";
 import { Jugador } from "../../../jugador";
@@ -8,9 +9,10 @@ export class Zeus extends Tragamonedas {
 
 
 
-    //////////////////// metodo   Automatico
+ //----tragamonedas con metodo manual----//
 
     public jugar(pJugador: Jugador): void {
+        let creditoInicial : number = pJugador.getCredito();
         let ventana: number[] = [];
         let finAutomatico: number = 0;
         console.log("creditos del jugador=??" + this.validarCreditos(pJugador));
@@ -91,8 +93,6 @@ export class Zeus extends Tragamonedas {
                             }
                         }
 
-
-
                         if (maximo === this.cantidadRodillo) {
                             this.pagarApuesta(this.montoApostado * 1.5, pJugador);
                                 console.log("");
@@ -118,7 +118,6 @@ export class Zeus extends Tragamonedas {
                             console.log(colors.red("****************************************************************"));
                             console.log("");
                         }
-                        
                         console.log("Creditos disponible para jugar : " + pJugador.getCredito());
                         console.log(colors.yellow("________________________________________________________________"));
                         console.log("");
@@ -126,9 +125,12 @@ export class Zeus extends Tragamonedas {
                         finAutomatico++;
                     }
                     ventana = [];
-
                 }
             }
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+        
+        let creditoFinal : number = pJugador.getCredito();
+
+        fs.appendFileSync('./class/juegos/tragamonedas/zeus/zeus-estadistica.txt',pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     }
 }

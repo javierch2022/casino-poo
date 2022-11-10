@@ -16,7 +16,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 exports.Tragamonedas = void 0;
-var readlineSync = require('readline-sync');
 var juego_1 = require("../../juego");
 var Tragamonedas = /** @class */ (function (_super) {
     __extends(Tragamonedas, _super);

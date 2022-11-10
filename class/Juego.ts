@@ -1,10 +1,4 @@
-import { BlackJack } from "./juegos/blackjack/blackJack";
-import { Ruleta } from "./juegos/ruleta/ruleta";
-import { Tragamonedas } from "./juegos/tragamonedas/tragamonedas";
-import { Casino } from "./casino";
 import { Jugador } from "./jugador";
-
-
 
 export abstract class Juego {
     protected nombre: string; 
@@ -44,7 +38,7 @@ export abstract class Juego {
         this.credito += pCredito * this.pagoCasa;
     }
     public cobrarApuesta(pCredito: number,pJugador:Jugador): void {
-        pJugador.setCredito(pJugador.getCredito() - (pCredito/* * this.pagoCasa*/));
+        pJugador.setCredito(pJugador.getCredito() - (pCredito));
         this.credito -= pCredito;
     }
 

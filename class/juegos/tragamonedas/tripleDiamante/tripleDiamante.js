@@ -18,14 +18,16 @@ exports.__esModule = true;
 exports.TripleDiamante = void 0;
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 var tragamonedas_1 = require("../tragamonedas");
 var TripleDiamante = /** @class */ (function (_super) {
     __extends(TripleDiamante, _super);
     function TripleDiamante() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // tragamonedas con metodo manual/Automatico
+    //----tragamonedas con metodo manual/Automatico----//
     TripleDiamante.prototype.jugar = function (pJugador) {
+        var creditoInicial = pJugador.getCredito();
         var ventana = [];
         var finAutomatico;
         var cantidadDeTiros;
@@ -95,13 +97,11 @@ var TripleDiamante = /** @class */ (function (_super) {
                             console.log(colors.yellow("****************************************************************"));
                             var contador = new Array(this.cantidadRodillo);
                             contador.fill(0);
-                            /* ventana por contador no va ---- VER */
                             for (var i = 0; i < ventana.length; i++) {
                                 contador[ventana[i] - 1]++;
                             }
                             var maximo = 0;
                             var posicion = 0;
-                            /* ventana por contador no va ---- VER */
                             for (var i = 0; i < ventana.length; i++) {
                                 if (contador[i] > maximo) {
                                     maximo = contador[i];
@@ -145,6 +145,8 @@ var TripleDiamante = /** @class */ (function (_super) {
                 }
             }
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+        var creditoFinal = pJugador.getCredito();
+        fs.appendFileSync('./class/juegos/tragamonedas/tripleDiamante/tripleDiamante-estadistica.txt', pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     };
     return TripleDiamante;
 }(tragamonedas_1.Tragamonedas));

@@ -1,51 +1,17 @@
 var readlineSync = require('readline-sync');
 var colors = require('colors/safe');
+var fs = require('fs');
 
-import { Casino } from "../../casino";
 import { Juego } from "../../juego";
 import { Jugador } from "../../jugador";
 
-class ApuestaBlackJack {
-    private creditoApuesta: number;
-    constructor(creditoApuesta: number) {
-        this.creditoApuesta = creditoApuesta;
-    }
-}
+
 
 export class BlackJack extends Juego {
-    protected totalCartas: number; // todas las cartas
-    protected mazoCartas: string[]; // sumar valores de cart
-    protected numeroCartas: string[]; // cartas de 1 a 1
-    protected pedirCartas: boolean;
-    protected noMasCartas: boolean;
-    protected cartasJugador: number;
-    protected cartasPC: number;
-
-
+    
     constructor(pNombre: string, pCredito: number, pPagoCasa: number) {
         super(pNombre, pCredito, pPagoCasa);
-
-        this.totalCartas = 52;
-        this.numeroCartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-        this.pedirCartas = false;
-        this.noMasCartas = false;
-
     }
-
-    //--------get & set-------//
-    public setPedirCartas(): void {
-        this.pedirCartas = true;
-    }
-    public getPedirCartas(): boolean {
-        return this.pedirCartas;
-    }
-    public setNoMasCartas(): void {
-        this.noMasCartas = true;
-    }
-    public getNoMasCartas(): boolean {
-        return this.noMasCartas;
-    }
-
     //--------metodos---------//
 
     public entregarCarta(): number {
@@ -62,6 +28,7 @@ export class BlackJack extends Juego {
     }
 
     public jugar(pJugador: Jugador): void {
+        let creditoInicial : number = pJugador.getCredito();
         let jugador: number = 0; // suma de cartas 
         let computadora: number = 0; // suma de cartas
         do {
@@ -96,7 +63,7 @@ export class BlackJack extends Juego {
             console.log("");
             console.log(colors.green("________________________________________________________________"));
             console.log("");
-            console.log(" Probabilidad de ganar es: ????%");
+            console.log(" Probabilidad de ganar es: 2% ");
             console.log("");
             console.log(colors.green("________________________________________________________________"));
             console.log("");
@@ -172,5 +139,9 @@ export class BlackJack extends Juego {
             
             jugador = computadora = 0;
         } while (Number(readlineSync.question("Seleccion >> 1 << para Salir y >> 0 << para volver a jugar: ")) === 0);
+
+        let creditoFinal : number = pJugador.getCredito();
+
+        fs.appendFileSync('./class/juegos/blackjack/blackjack-estadistica.txt',pJugador.getNombre() + '; ' + creditoInicial + '; ' + creditoFinal + '.\r\n');
     }
 }
